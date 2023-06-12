@@ -10,31 +10,37 @@ services:
         environment:
             - SPRING_DATASOURCE_URL=jdbc:h2:file:./database/userdb
 
+#    compilerservice:
+#        image: dariotintore/compiler-service
+#        container_name: compiler-service
+#        ports:
+##            - '8083:8083'
+#        environment:
+#            - SPRING_DATASOURCE_URL=jdbc:h2:file:./database/compilerdb
+#            - PORTAINER_URL=http://portainer:9000/
+#            - PORTAINER_USERNAME=admin
+#            - PORTAINER_PASSWORD=password123456
+#            - JUNIT_PATH=sharedcodebase
+#        depends_on:
+#            - portainer
+#        volumes:
+#            - ${COMPILER_PATH}:/sharedcodebase
+
     compilerservice:
-        image: dariotintore/compiler-service
+        image: dariotintore/compiler-service-node
         container_name: compiler-service
         ports:
-            - '8083:8083'
-        environment:
-            - SPRING_DATASOURCE_URL=jdbc:h2:file:./database/compilerdb
-            - PORTAINER_URL=http://portainer:9000/
-            - PORTAINER_USERNAME=admin
-            - PORTAINER_PASSWORD=password123456
-            - JUNIT_PATH=sharedcodebase
-        depends_on:
-            - portainer
-        volumes:
-            - ${COMPILER_PATH}:/sharedcodebase
+            - 8083:8083
 
-    testingservice:
-        image: dariotintore/junit-testing-service:2
-        container_name: junit-service
-        entrypoint: ["./start.sh"]
-        tty: true
-        depends_on:
-            - compilerservice
-        volumes:
-            - ${COMPILER_PATH}:/test
+#    testingservice:
+#        image: dariotintore/junit-testing-service:2
+#        container_name: junit-service
+#        entrypoint: ["./start.sh"]
+#        tty: true
+#        depends_on:
+#            - compilerservice
+#        volumes:
+#            - ${COMPILER_PATH}:/test
 
     leaderboardservice:
         image: dariotintore/leaderboard-service
@@ -44,18 +50,18 @@ services:
         environment:
             - SPRING_DATASOURCE_URL=jdbc:h2:file:./database/leaderboarddb
 
-    portainer:
-        image: portainer/portainer-ce:latest
-        container_name: portainer
-        restart: unless-stopped
-        security_opt:
-          - no-new-privileges:true
-        volumes:
-          - /etc/localtime:/etc/localtime:ro
-          - /var/run/docker.sock:/var/run/docker.sock:ro
-          - ./portainer-data:/data
-        ports:
-          - 9000:9000
+#    portainer:
+#        image: portainer/portainer-ce:latest
+#        container_name: portainer
+#        restart: unless-stopped
+#        security_opt:
+#          - no-new-privileges:true
+#        volumes:
+#          - /etc/localtime:/etc/localtime:ro
+#          - /var/run/docker.sock:/var/run/docker.sock:ro
+#          - ./portainer-data:/data
+#        ports:
+#          - 9000:9000
 
 
 volumes:
