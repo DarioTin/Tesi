@@ -24,5 +24,11 @@ services:
         environment:
             - SPRING_DATASOURCE_URL=jdbc:h2:file:./database/leaderboarddb
 
+    exerciseservice:
+        image: dariotintore/exercise-service
+        container_name: exercise-service
+        ports:
+            - '9090:9090'
+
 volumes:
     compiler-volume:

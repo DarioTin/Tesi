@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tesi-DarioTintore.iml" filepath="$PROJECT_DIR$/.idea/Tesi-DarioTintore.iml" />
+      <module fileurl="file://$USER_HOME$/WebstormProjects/newcompilerservice/.idea/newcompilerservice.iml" filepath="$USER_HOME$/WebstormProjects/newcompilerservice/.idea/newcompilerservice.iml" />
     </modules>
   </component>
 </project>
